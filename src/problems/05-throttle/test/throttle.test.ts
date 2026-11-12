@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'bun:test'
+import { describe, it, expect } from 'vitest'
 import { throttle as referenceSolution } from '../solution/throttle'
 import { throttle as studentSolution } from '../throttle.vanila'
 

@@ -1,4 +1,4 @@
-// bun test src/problems/05-throttle/test/throttle.test.ts
+// pnpm test src/problems/05-throttle/test/throttle.test.ts
 
 export function throttle() {
 

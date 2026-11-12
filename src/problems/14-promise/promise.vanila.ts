@@ -1,4 +1,4 @@
-// bun test src/problems/14-promise/test/promise.test.ts
+// pnpm test src/problems/14-promise/test/promise.test.ts
 
 type PromiseStatus = 'pending' | 'fulfilled' | 'rejected'
 

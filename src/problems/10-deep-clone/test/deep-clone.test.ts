@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'bun:test'
+import { describe, it, expect } from 'vitest'
 import { deepClone as referenceSolution } from '../solution/deep-clone'
 import { deepClone as studentSolution } from '../deep-clone.vanila'
 

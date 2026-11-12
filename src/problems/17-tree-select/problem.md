@@ -72,5 +72,5 @@ Clicking 'c' selects it, which makes 'b' partial (one child selected), which mak
 ## Run Tests
 
 ```bash
-bun test src/problems/17-tree-select/test/tree-select.test.ts
+pnpm test src/problems/17-tree-select/test/tree-select.test.ts
 ```

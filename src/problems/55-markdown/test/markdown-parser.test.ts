@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'bun:test'
+import { describe, it, expect } from 'vitest'
 import {
   parseRichText as refParseRichText,
   RICH_TEXT_RULES as refRICH_TEXT_RULES,

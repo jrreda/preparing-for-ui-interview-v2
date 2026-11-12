@@ -73,38 +73,38 @@ Problems are grouped into the following difficulty levels:
 
 ## 🚀 Running Instructions
 
-This project uses **[Bun](https://bun.sh/)** as a runtime and package manager.
+This project uses **[pnpm](https://pnpm.io/)** as the package manager, Vite for the dev server, and Vitest for tests.
 
 ### Prerequisites
 
-- Install Bun: [https://bun.sh/docs/installation](https://bun.sh/docs/installation)
+- Install pnpm: [https://pnpm.io/installation](https://pnpm.io/installation)
 
 ### Commands
 
 **Install Dependencies:**
 
 ```bash
-bun install
+pnpm install
 ```
 
 **Run Development Server:**
 
 ```bash
-bun dev
+pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) (or the port shown in console) to see the app.
+Open [http://localhost:3000](http://localhost:3000) to see the app.
 
 **Run Tests:**
 
 ```bash
-bun test
+pnpm test
 ```
 
 **Type Check:**
 
 ```bash
-npx tsc --noEmit
+pnpm exec tsc --noEmit
 ```
 
 ## 📚 Table of Contents

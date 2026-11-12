@@ -1,4 +1,4 @@
-// bun test src/problems/41-calculator/test/calculator.utils.test.ts
+// pnpm test src/problems/41-calculator/test/calculator.utils.test.ts
 import { useState } from 'react'
 import css from './calculator.module.css'
 import flex from '@course/styles'

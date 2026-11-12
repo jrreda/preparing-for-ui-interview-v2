@@ -1,4 +1,4 @@
-// bun test src/problems/09-deep-equals/test/deep-equals.test.ts
+// pnpm test src/problems/09-deep-equals/test/deep-equals.test.ts
 
 import { detectType } from '@course/utils'
 

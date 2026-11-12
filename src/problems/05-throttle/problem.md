@@ -42,5 +42,5 @@ log('d') // Logs 'd'
 ## Run Tests
 
 ```bash
-bun test src/problems/05-throttle/test/throttle.test.ts
+pnpm test src/problems/05-throttle/test/throttle.test.ts
 ```

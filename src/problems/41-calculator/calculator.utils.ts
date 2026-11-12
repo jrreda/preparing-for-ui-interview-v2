@@ -1,4 +1,4 @@
-// Run tests: bun test src/problems/41-calculator/test/calculator.utils.test.ts
+// Run tests: pnpm test src/problems/41-calculator/test/calculator.utils.test.ts
 
 /** Action function signature: takes the current expression string and a label, returns the new expression string. */
 export type TButtonAction = (state: string, operator: string) => string

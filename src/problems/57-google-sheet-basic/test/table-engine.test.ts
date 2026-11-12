@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'bun:test'
+import { describe, it, expect } from 'vitest'
 import { TableEngine as SolutionEngine } from '../solution/table-engine'
 import { TableEngine as StudentEngine } from '../table-engine'
 

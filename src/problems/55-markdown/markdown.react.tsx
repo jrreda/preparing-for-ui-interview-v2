@@ -1,4 +1,4 @@
-// bun test src/problems/55-markdown/markdown-parser.test.ts
+// pnpm test src/problems/55-markdown/markdown-parser.test.ts
 import React, { useMemo } from 'react'
 import css from './markdown.module.css'
 import flex from '@course/styles'

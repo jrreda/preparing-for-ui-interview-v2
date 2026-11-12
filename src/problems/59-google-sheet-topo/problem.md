@@ -226,5 +226,5 @@ After Kahn's algorithm finishes, if `order.length < affected.size`, the remainin
 Run tests to verify that your topological sorter provides the correct sequence and correctly identifies cycles:
 
 ```bash
-bun test src/problems/components/59-google-sheet-topo/test
+pnpm test src/problems/components/59-google-sheet-topo/test
 ```

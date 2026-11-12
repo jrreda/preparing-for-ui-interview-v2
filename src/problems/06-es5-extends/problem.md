@@ -60,5 +60,5 @@ dog instanceof Animal // true
 ## Run Tests
 
 ```bash
-bun test src/problems/06-es5-extends/test/es5-extends.test.ts
+pnpm test src/problems/06-es5-extends/test/es5-extends.test.ts
 ```

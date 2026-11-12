@@ -1,4 +1,4 @@
-// bun test src/problems/60-google-sheet-eval/test/table-engine.test.ts
+// pnpm test src/problems/60-google-sheet-eval/test/table-engine.test.ts
 
 // @ts-ignore
 import {

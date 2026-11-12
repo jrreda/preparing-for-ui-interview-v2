@@ -1,5 +1,5 @@
 /* eslint-disable no-sparse-arrays */
-import { describe, it, expect } from 'bun:test'
+import { describe, it, expect } from 'vitest'
 import { deepEquals as referenceSolution } from '../solution/deep-equals'
 import { deepEquals as studentSolution } from '../deep-equals.vanila'
 

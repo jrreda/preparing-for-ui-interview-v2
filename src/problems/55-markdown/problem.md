@@ -160,4 +160,4 @@ Some rules use negative lookaheads or exclusion patterns to skip content already
 2. Type `**bold**` → renders as bold text.
 3. Type a table → renders as HTML table.
 4. Type a list → renders as `<ul>` or `<ol>`.
-5. All parser tests pass (`bun test markdown`).
+5. All parser tests pass (`pnpm test markdown`).

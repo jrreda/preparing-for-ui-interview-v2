@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'bun:test'
+import { describe, it, expect } from 'vitest'
 import { stringify as referenceSolution } from '../solution/stringify'
 import { stringify as studentSolution } from '../stringify.vanila'
 

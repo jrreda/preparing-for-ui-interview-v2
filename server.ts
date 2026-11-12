@@ -1,164 +1,185 @@
-import homepage from './public/index.html'
+import { readFile } from 'node:fs/promises'
+import type { IncomingMessage, ServerResponse } from 'node:http'
+import path from 'node:path'
 
-Bun.serve({
-  routes: {
-    '/': homepage,
-  },
-  development: {
-    hmr: false,
-  },
-  async fetch(req) {
-    const url = new URL(req.url) // Parse URL properly
+const root = process.cwd()
 
-    // CORS headers
-    const headers = {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type, X-File-Name',
+const folderMap: Record<string, string> = {
+  toast: 'toast',
+  checkbox: 'nested-checkboxes',
+  accordion: 'accordion',
+  tabs: 'tabs',
+  tooltip: 'tooltip',
+  table: 'table',
+  markdown: 'markdown',
+  squareGame: 'square-game',
+  progressBar: 'progress-bar',
+  uploadComponent: 'upload-component',
+  infiniteCanvas: 'infinite-canvas',
+  gallery: 'gallery',
+  gptChat: 'gpt-chat',
+  heatmap: 'heatmap',
+  heatmapCanvas: 'heatmap-canvas',
+  redditThread: 'reddit-thread',
+  starRating: 'star-rating',
+  videoPlayer: 'video-player',
+}
+
+function applyCors(res: ServerResponse) {
+  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS')
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-File-Name')
+}
+
+function send(
+  res: ServerResponse,
+  status: number,
+  body: string,
+  contentType = 'text/plain; charset=utf-8',
+) {
+  applyCors(res)
+  res.statusCode = status
+  res.setHeader('Content-Type', contentType)
+  res.end(body)
+}
+
+async function handleUpload(req: IncomingMessage, res: ServerResponse) {
+  const filename = req.headers['x-file-name']
+  if (!filename || Array.isArray(filename)) {
+    send(res, 400, 'Missing X-File-Name header')
+    return
+  }
+
+  console.log(`Receiving stream for ${filename}`)
+
+  try {
+    for await (const _chunk of req) {
+      // Drain the upload body. The exercise server does not persist the file.
     }
+    send(res, 200, 'Upload success')
+  } catch {
+    console.log(`Upload interrupted for ${filename}`)
+    if (!res.writableEnded) send(res, 200, 'Interrupted')
+  }
+}
 
-    if (req.method === 'OPTIONS') {
-      return new Response(null, { headers })
+async function streamMarkdown(res: ServerResponse, delay: number) {
+  let content: string
+  try {
+    content = await readFile(path.join(root, 'public/sample-response.md'), 'utf8')
+  } catch {
+    send(res, 404, 'File not found')
+    return
+  }
+
+  applyCors(res)
+  res.statusCode = 200
+  res.setHeader('Content-Type', 'text/plain; charset=utf-8')
+  res.setHeader('Cache-Control', 'no-cache')
+
+  let position = 0
+  const chunkSize = 100
+  let timer: ReturnType<typeof setTimeout> | undefined
+  let closed = false
+
+  const stop = () => {
+    closed = true
+    if (timer) clearTimeout(timer)
+  }
+  res.on('close', stop)
+
+  const sendChunk = () => {
+    if (closed) return
+    if (position >= content.length) {
+      res.end()
+      return
     }
+    res.write(content.slice(position, position + chunkSize))
+    position += chunkSize
+    timer = setTimeout(sendChunk, delay)
+  }
 
-    // POST /api/upload
-    if (url.pathname === '/api/upload' && req.method === 'POST') {
-      const filename = req.headers.get('X-File-Name')
-      if (!filename) return new Response('Missing X-File-Name header', { status: 400, headers })
+  sendChunk()
+}
 
-      console.log(`Receiving stream for ${filename}`)
+async function handleProblem(res: ServerResponse, problemId: string) {
+  const folder = folderMap[problemId]
+  if (!folder) {
+    send(res, 404, 'Problem not found')
+    return
+  }
 
-      if (req.body) {
-        const reader = req.body.getReader()
-        try {
-          while (true) {
-            const { done } = await reader.read()
-            if (done) break
-          }
-        } catch {
-          console.log(`Upload interrupted for ${filename}`)
-          return new Response('Interrupted', { status: 200, headers })
-        }
-      }
+  try {
+    const content = await readFile(path.join(root, 'src/done', folder, 'problem.md'), 'utf8')
+    send(res, 200, content)
+  } catch {
+    send(res, 404, 'Problem file not found')
+  }
+}
 
-      return new Response('Upload success', { status: 200, headers })
-    }
+async function handleTypeahead(req: IncomingMessage, res: ServerResponse, url: URL) {
+  const query = url.searchParams.get('query') || ''
+  const limit = parseInt(url.searchParams.get('limit') || '10', 10)
 
-    // GET /api/stream-markdown - Stream markdown file character by character
-    if (url.pathname === '/api/stream-markdown' && req.method === 'GET') {
-      const delay = parseInt(url.searchParams.get('delay') || '300')
+  await new Promise((resolve) => setTimeout(resolve, 2000))
+  if (res.writableEnded || req.destroyed) return
 
-      try {
-        const file = Bun.file('./public/sample-response.md')
-        const content = await file.text()
+  try {
+    const text = await readFile(path.join(root, 'src/problems/45-typeahead/data.json'), 'utf8')
+    const data = JSON.parse(text) as Array<{ query: string; id: string; value: string }>
+    const filtered = data
+      .filter((item) => item.query.toLowerCase().includes(query.toLowerCase()))
+      .slice(0, limit)
 
-        const stream = new ReadableStream({
-          async start(controller) {
-            const encoder = new TextEncoder()
-            let position = 0
+    send(res, 200, JSON.stringify(filtered), 'application/json')
+  } catch (error) {
+    console.error(error)
+    if (!res.writableEnded) send(res, 500, 'Error processing request')
+  }
+}
 
-            while (position < content.length) {
-              // Fixed chunk size of 100 characters
-              const chunkSize = 100
-              const chunk = content.slice(position, position + chunkSize)
-              controller.enqueue(encoder.encode(chunk))
-              position += chunkSize
-              await new Promise((resolve) => setTimeout(resolve, delay))
-            }
-            controller.close()
-          },
-        })
+async function handleApi(req: IncomingMessage, res: ServerResponse, url: URL) {
+  if (req.method === 'OPTIONS') {
+    applyCors(res)
+    res.statusCode = 204
+    res.end()
+    return
+  }
 
-        return new Response(stream, {
-          headers: {
-            ...headers,
-            'Content-Type': 'text/plain; charset=utf-8',
-            'Transfer-Encoding': 'chunked',
-            'Cache-Control': 'no-cache',
-          },
-        })
-      } catch (_error) {
-        return new Response('File not found', { status: 404, headers })
-      }
-    }
+  if (url.pathname === '/api/upload' && req.method === 'POST') {
+    await handleUpload(req, res)
+    return
+  }
 
-    // GET /api/problem/:problemId - Serve problem markdown file
-    if (url.pathname.startsWith('/api/problem/') && req.method === 'GET') {
-      const problemId = url.pathname.replace('/api/problem/', '')
+  if (url.pathname === '/api/stream-markdown' && req.method === 'GET') {
+    const delay = parseInt(url.searchParams.get('delay') || '300', 10)
+    await streamMarkdown(res, delay)
+    return
+  }
 
-      // Map problemId to folder path
-      const folderMap: Record<string, string> = {
-        toast: 'toast',
-        checkbox: 'nested-checkboxes',
-        accordion: 'accordion',
-        tabs: 'tabs',
-        tooltip: 'tooltip',
-        table: 'table',
-        markdown: 'markdown',
-        squareGame: 'square-game',
-        progressBar: 'progress-bar',
-        uploadComponent: 'upload-component',
-        infiniteCanvas: 'infinite-canvas',
-        gallery: 'gallery',
-        gptChat: 'gpt-chat',
-        heatmap: 'heatmap',
-        heatmapCanvas: 'heatmap-canvas',
-        redditThread: 'reddit-thread',
-        starRating: 'star-rating',
-        videoPlayer: 'video-player',
-      }
+  if (url.pathname.startsWith('/api/problem/') && req.method === 'GET') {
+    const problemId = decodeURIComponent(url.pathname.slice('/api/problem/'.length))
+    await handleProblem(res, problemId)
+    return
+  }
 
-      const folder = folderMap[problemId]
-      if (!folder) {
-        return new Response('Problem not found', { status: 404, headers })
-      }
+  if (url.pathname === '/api/typeahead' && req.method === 'GET') {
+    await handleTypeahead(req, res, url)
+    return
+  }
 
-      try {
-        const file = Bun.file(`./src/done/${folder}/problem.md`)
-        const content = await file.text()
-        return new Response(content, {
-          headers: {
-            ...headers,
-            'Content-Type': 'text/plain; charset=utf-8',
-          },
-        })
-      } catch {
-        return new Response('Problem file not found', { status: 404, headers })
-      }
-    }
+  send(res, 404, 'Not Found')
+}
 
-    // GET /api/typeahead - Search typeahead entries
-    if (url.pathname === '/api/typeahead' && req.method === 'GET') {
-      const query = url.searchParams.get('query') || ''
-      const limit = parseInt(url.searchParams.get('limit') || '10')
+export function apiMiddleware(req: IncomingMessage, res: ServerResponse, next: (err?: unknown) => void) {
+  const url = new URL(req.url ?? '/', `http://${req.headers.host ?? 'localhost'}`)
+  if (!url.pathname.startsWith('/api/')) {
+    next()
+    return
+  }
 
-      // Simulate 2s delay
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-
-      try {
-        const file = Bun.file('./src/problems/45-typeahead/data.json')
-        // TODO: caching strategy for production, but for now file read is fine
-        const text = await file.text()
-        const data = JSON.parse(text) as Array<{ query: string; id: string; value: string }>
-
-        const filtered = data
-          .filter((item) => item.query.toLowerCase().includes(query.toLowerCase()))
-          .slice(0, limit)
-
-        return new Response(JSON.stringify(filtered), {
-          headers: {
-            ...headers,
-            'Content-Type': 'application/json',
-          },
-        })
-      } catch (e) {
-        console.error(e)
-        return new Response('Error processing request', { status: 500, headers })
-      }
-    }
-
-    return new Response('Not Found', { status: 404, headers })
-  },
-})
-
-console.log('🚀 Server running at http://localhost:3000')
+  void handleApi(req, res, url).catch((error) => {
+    console.error(error)
+    if (!res.writableEnded) send(res, 500, 'Error processing request')
+  })
+}

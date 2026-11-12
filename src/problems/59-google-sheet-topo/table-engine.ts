@@ -1,4 +1,4 @@
-// bun test src/problems/59-google-sheet-topo/test/table-engine.test.ts
+// pnpm test src/problems/59-google-sheet-topo/test/table-engine.test.ts
 
 // @ts-ignore
 import { tokenize, toRpn, type CellId, type Compiled } from '../../utilities/google-sheet-parser'

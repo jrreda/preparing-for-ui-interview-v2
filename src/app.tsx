@@ -128,47 +128,47 @@ import {
   GoogleSheetStudentVanillaExample,
 } from './problems/62-google-sheet-ux/google-sheet.example.tsx'
 
-// Import problem markdown files (Bun text imports)
-import toastProblem from './problems/38-toast/problem.md' with { type: 'text' }
-import checkboxProblem from './problems/37-nested-checkboxes/problem.md' with { type: 'text' }
-import accordionProblem from './problems/21-accordion/problem.md' with { type: 'text' }
-import tabsProblem from './problems/25-tabs/problem.md' with { type: 'text' }
-import tooltipProblem from './problems/29-tooltip/problem.md' with { type: 'text' }
-import dialogProblem from './problems/26-dialog/problem.md' with { type: 'text' }
-import tableProblem from './problems/30-table/problem.md' with { type: 'text' }
-import markdownProblem from './problems/55-markdown/problem.md' with { type: 'text' }
-import squareGameProblem from './problems/42-square-game/problem.md' with { type: 'text' }
-import progressBarProblem from './problems/46-progress-bar/problem.md' with { type: 'text' }
-import uploadComponentProblem from './problems/50-upload-component/problem.md' with { type: 'text' }
-import useFileUploadProblem from './problems/49-use-file-upload/problem.md' with { type: 'text' }
-import portfolioVisualizerUxProblem from './problems/53-portfolio-visualizer-ux/problem.md' with { type: 'text' }
-import portfolioVisualizerLogicProblem from './problems/54-portfolio-visualizer-logic/problem.md' with { type: 'text' }
-import tableEngineBasicProblem from './problems/57-google-sheet-basic/problem.md' with { type: 'text' }
-import tableEngineCompileProblem from './problems/58-google-sheet-compile/problem.md' with { type: 'text' }
-import tableEngineTopoProblem from './problems/59-google-sheet-topo/problem.md' with { type: 'text' }
-import tableEngineEvalProblem from './problems/60-google-sheet-eval/problem.md' with { type: 'text' }
-import tableEngineRecomputeProblem from './problems/61-google-sheet-recompute/problem.md' with { type: 'text' }
-import googleSheetProblem from './problems/62-google-sheet-ux/problem.md' with { type: 'text' }
+// Import problem markdown files as text
+import toastProblem from './problems/38-toast/problem.md?raw'
+import checkboxProblem from './problems/37-nested-checkboxes/problem.md?raw'
+import accordionProblem from './problems/21-accordion/problem.md?raw'
+import tabsProblem from './problems/25-tabs/problem.md?raw'
+import tooltipProblem from './problems/29-tooltip/problem.md?raw'
+import dialogProblem from './problems/26-dialog/problem.md?raw'
+import tableProblem from './problems/30-table/problem.md?raw'
+import markdownProblem from './problems/55-markdown/problem.md?raw'
+import squareGameProblem from './problems/42-square-game/problem.md?raw'
+import progressBarProblem from './problems/46-progress-bar/problem.md?raw'
+import uploadComponentProblem from './problems/50-upload-component/problem.md?raw'
+import useFileUploadProblem from './problems/49-use-file-upload/problem.md?raw'
+import portfolioVisualizerUxProblem from './problems/53-portfolio-visualizer-ux/problem.md?raw'
+import portfolioVisualizerLogicProblem from './problems/54-portfolio-visualizer-logic/problem.md?raw'
+import tableEngineBasicProblem from './problems/57-google-sheet-basic/problem.md?raw'
+import tableEngineCompileProblem from './problems/58-google-sheet-compile/problem.md?raw'
+import tableEngineTopoProblem from './problems/59-google-sheet-topo/problem.md?raw'
+import tableEngineEvalProblem from './problems/60-google-sheet-eval/problem.md?raw'
+import tableEngineRecomputeProblem from './problems/61-google-sheet-recompute/problem.md?raw'
+import googleSheetProblem from './problems/62-google-sheet-ux/problem.md?raw'
 
-import galleryProblem from './problems/34-gallery/problem.md' with { type: 'text' }
-import gptChatProblem from './problems/56-gpt-chat/problem.md' with { type: 'text' }
+import galleryProblem from './problems/34-gallery/problem.md?raw'
+import gptChatProblem from './problems/56-gpt-chat/problem.md?raw'
 
-import redditThreadProblem from './problems/33-reddit-thread/problem.md' with { type: 'text' }
-import starRatingProblem from './problems/22-star-rating/problem.md' with { type: 'text' }
-import calculatorProblem from './problems/41-calculator/problem.md' with { type: 'text' }
-import typeaheadProblem from './problems/45-typeahead/problem.md' with { type: 'text' }
+import redditThreadProblem from './problems/33-reddit-thread/problem.md?raw'
+import starRatingProblem from './problems/22-star-rating/problem.md?raw'
+import calculatorProblem from './problems/41-calculator/problem.md?raw'
+import typeaheadProblem from './problems/45-typeahead/problem.md?raw'
 
 // Import vanilla JS problem markdown files
-import detectTypeProblem from './problems/01-detect-type/problem.md' with { type: 'text' }
-import debounceProblem from './problems/02-debounce/problem.md' with { type: 'text' }
-import throttleProblem from './problems/05-throttle/problem.md' with { type: 'text' }
-import es5ExtendsProblem from './problems/06-es5-extends/problem.md' with { type: 'text' }
-import deepEqualsProblem from './problems/09-deep-equals/problem.md' with { type: 'text' }
-import deepCloneProblem from './problems/10-deep-clone/problem.md' with { type: 'text' }
-import stringifyProblem from './problems/13-stringify/problem.md' with { type: 'text' }
-import promiseProblem from './problems/14-promise/problem.md' with { type: 'text' }
-import treeSelectProblem from './problems/17-tree-select/problem.md' with { type: 'text' }
-import abstractComponentProblem from './problems/18-abstract-component/problem.md' with { type: 'text' }
+import detectTypeProblem from './problems/01-detect-type/problem.md?raw'
+import debounceProblem from './problems/02-debounce/problem.md?raw'
+import throttleProblem from './problems/05-throttle/problem.md?raw'
+import es5ExtendsProblem from './problems/06-es5-extends/problem.md?raw'
+import deepEqualsProblem from './problems/09-deep-equals/problem.md?raw'
+import deepCloneProblem from './problems/10-deep-clone/problem.md?raw'
+import stringifyProblem from './problems/13-stringify/problem.md?raw'
+import promiseProblem from './problems/14-promise/problem.md?raw'
+import treeSelectProblem from './problems/17-tree-select/problem.md?raw'
+import abstractComponentProblem from './problems/18-abstract-component/problem.md?raw'
 import {
   AbstractComponentExample,
   AbstractComponentStudentExample,

@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'bun:test'
+import { describe, it, expect } from 'vitest'
 import { MyPromise as referenceSolution } from '../solution/promise'
 import { MyPromise as studentSolution } from '../promise.vanila'
 

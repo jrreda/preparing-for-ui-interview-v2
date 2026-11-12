@@ -1,4 +1,4 @@
-// bun test src/problems/17-tree-select/test/tree-select.test.ts
+// pnpm test src/problems/17-tree-select/test/tree-select.test.ts
 
 type TSelectStatus = 'v' | ' ' | 'o'
 

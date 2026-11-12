@@ -1,4 +1,4 @@
-// bun test src/problems/13-stringify/test/stringify.test.ts
+// pnpm test src/problems/13-stringify/test/stringify.test.ts
 
 import { detectType } from '@course/utils'
 

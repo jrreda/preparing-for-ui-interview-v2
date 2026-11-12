@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'bun:test'
+import { describe, it, expect } from 'vitest'
 import { renderTreeSelect as referenceSolution } from '../solution/tree-select'
 import { renderTreeSelect as studentSolution } from '../tree-select.vanila'
 

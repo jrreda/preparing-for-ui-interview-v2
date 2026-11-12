@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'bun:test'
+import { describe, it, expect } from 'vitest'
 import { myExtends as referenceSolution } from '../solution/es5-extends'
 import { myExtends as studentSolution } from '../es5-extends.vanila'
 

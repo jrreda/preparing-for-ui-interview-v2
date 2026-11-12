@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'bun:test'
+import { describe, it, expect } from 'vitest'
 import { detectType as referenceSolution } from '../solution/detect-type'
 import { detectType as studentSolution } from '../detect-type.vanila'
 

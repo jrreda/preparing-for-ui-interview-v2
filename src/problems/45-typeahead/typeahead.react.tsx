@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import css from './typeahead.module.css'
 import flex from '@course/styles'
 import cx from '@course/cx'
-import { Trie } from './trie'
 
 export type TTypeaheadEntry<T> = {
   query: string

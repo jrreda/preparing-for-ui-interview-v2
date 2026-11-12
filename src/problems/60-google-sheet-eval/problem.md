@@ -162,5 +162,5 @@ evalRpn(rpn, (refId) => this.getValue(refId))
 Run tests to ensure that math is accurately calculated and cell references resolve to their numeric values:
 
 ```bash
-bun test src/problems/components/60-google-sheet-eval/test
+pnpm test src/problems/components/60-google-sheet-eval/test
 ```

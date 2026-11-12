@@ -180,5 +180,5 @@ In later steps (19.2, 19.3), we'll iterate over `deps` and `rev` sets frequently
 Run the following command to verify your data structures:
 
 ```bash
-bun test src/problems/components/57-google-sheet-basic/test
+pnpm test src/problems/components/57-google-sheet-basic/test
 ```

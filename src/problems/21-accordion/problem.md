@@ -23,7 +23,7 @@ Build an accordion component that displays a list of expandable/collapsible item
 │   at compile time …              │
 │                                  │
 ├──────────────────────────────────┤
-│ ▶ What is Bun?                   │  ← collapsed
+│ ▶ What is CSS?                   │  ← collapsed
 └──────────────────────────────────┘
 ```
 

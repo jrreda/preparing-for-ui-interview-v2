@@ -1,4 +1,4 @@
-// bun test src/problems/02-debounce/test/debounce.test.ts
+// pnpm test src/problems/02-debounce/test/debounce.test.ts
 
 export function debounce() {
 

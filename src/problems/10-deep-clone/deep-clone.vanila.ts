@@ -1,4 +1,4 @@
-// bun test src/problems/10-deep-clone/test/deep-clone.test.ts
+// pnpm test src/problems/10-deep-clone/test/deep-clone.test.ts
 // TODO: Implement deepClone
 
 import { detectType } from '@course/utils'

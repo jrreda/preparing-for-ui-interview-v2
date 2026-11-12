@@ -1,4 +1,4 @@
-// bun test src/problems/57-google-sheet-basic/test/table-engine.test.ts
+// pnpm test src/problems/57-google-sheet-basic/test/table-engine.test.ts
 
 import type { CellId } from '../../utilities/google-sheet-parser'
 

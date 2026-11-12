@@ -162,5 +162,5 @@ The order of IDs in the `changed` array matters for the UI — it tells the rend
 Run tests against the full reactive engine to verify it handles complex dependency trees and cycle recovery correctly:
 
 ```bash
-bun test src/problems/components/61-google-sheet-recompute/test
+pnpm test src/problems/components/61-google-sheet-recompute/test
 ```

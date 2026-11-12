@@ -60,5 +60,5 @@ The `detectType` function from `@course/utils` is pre-imported in your student f
 ## Run Tests
 
 ```bash
-bun test src/problems/13-stringify/test/stringify.test.ts
+pnpm test src/problems/13-stringify/test/stringify.test.ts
 ```

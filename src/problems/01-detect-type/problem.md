@@ -85,5 +85,5 @@ The built-in `typeof` operator has limitations:
 ## Run Tests
 
 ```bash
-bun test src/problems/01-detect-type/test/detect-type.test.ts
+pnpm test src/problems/01-detect-type/test/detect-type.test.ts
 ```

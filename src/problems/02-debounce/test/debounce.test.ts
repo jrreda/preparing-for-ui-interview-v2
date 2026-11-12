@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'bun:test'
+import { describe, it, expect } from 'vitest'
 import { debounce as referenceSolution } from '../solution/debounce'
 import { debounce as studentSolution } from '../debounce.vanila'
 

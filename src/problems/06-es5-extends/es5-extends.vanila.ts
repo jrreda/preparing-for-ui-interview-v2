@@ -1,4 +1,4 @@
-// bun test src/problems/06-es5-extends/test/es5-extends.test.ts
+// pnpm test src/problems/06-es5-extends/test/es5-extends.test.ts
 
 export const myExtends = (SuperType: Function, SubType: Function) => {
   // Step 1: Create a new constructor function MyType(this, ...args)

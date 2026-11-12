@@ -205,5 +205,5 @@ In `#setDeps`, use your existing `#getDeps` and `#getRevDeps` private helpers (w
 Run tests to verify that AST tokens are correctly extracted and the bidirectional graph (`deps` ↔ `rev`) is maintained accurately:
 
 ```bash
-bun test src/problems/components/58-google-sheet-compile/test
+pnpm test src/problems/components/58-google-sheet-compile/test
 ```
