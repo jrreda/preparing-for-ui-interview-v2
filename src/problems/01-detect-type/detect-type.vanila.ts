@@ -1,3 +1,4 @@
+// node --experimental-strip-types src/problems/01-detect-type/detect-type.vanila.ts
 // pnpm test src/problems/01-detect-type/test/detect-type.test.ts
 
 export type TType =
@@ -23,7 +24,11 @@ export type TType =
   | string
 
 export const detectType = (value: any): TType => {
-    throw new Error('Not implemented')
+  if (value === null) return "null"
+  if (value === undefined) return "undefined"
+  // if (value == null) return `${value}`    // handle both null & undefined
+
+  return Object.getPrototypeOf(value)?.constructor.name.toLowerCase() ?? 'object'
 }
 
 // --- Examples ---
