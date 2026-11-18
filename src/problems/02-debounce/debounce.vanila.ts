@@ -1,7 +1,25 @@
 // pnpm test src/problems/02-debounce/test/debounce.test.ts
 
-export function debounce() {
+type AnyFunction = (...args: any[]) => any
+type Debounced<T extends AnyFunction> = (...args: Parameters<T>) => void
+type TimerId = ReturnType<typeof setTimeout>
 
+export function debounce<T extends AnyFunction>(fn: T, delay: number): Debounced<T> {
+  // Shared by every call; a new call cancels the previous wait
+  let timerId: TimerId | null = null
+
+  // recersion
+  return function debounce(this: unknown, ...args: Parameters<T>): void {
+    // Only the latest call is allowed to run
+    if (timerId) {
+      clearTimeout(timerId)
+    }
+
+    timerId = setTimeout(() => {
+      // Arrow keeps the caller's `this`; apply forwards it with the latest args
+      fn.apply(this, args)
+    }, delay)
+  }
 }
 
 // --- Examples ---
