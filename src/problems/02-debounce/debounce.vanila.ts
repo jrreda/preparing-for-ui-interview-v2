@@ -8,8 +8,7 @@ export function debounce<T extends AnyFunction>(fn: T, delay: number): Debounced
   // Shared by every call; a new call cancels the previous wait
   let timerId: TimerId | null = null
 
-  // recersion
-  return function debounce(this: unknown, ...args: Parameters<T>): void {
+  return function debounced(this: unknown, ...args: Parameters<T>): void {
     // Only the latest call is allowed to run
     if (timerId) {
       clearTimeout(timerId)
