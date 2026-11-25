@@ -38,6 +38,16 @@ log('c') // Timer resets
 2. Clear previous timeout on each call with `clearTimeout`
 3. Preserve `this` context with `.apply()`
 
+## React
+
+Implement `useDebounce` in `debounce.tsx`.
+
+```typescript
+function useDebounce<T>(value: T, delay: number): T
+```
+
+The returned value updates only after `delay` milliseconds pass with no further change to `value`. Open **Student · React**, type in the input, and pause. The immediate line updates on each keystroke. The debounced line should update 500ms after you stop.
+
 ## Run Tests
 
 ```bash

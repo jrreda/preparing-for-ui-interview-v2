@@ -8,6 +8,9 @@ import {
   ToastStudentVanillaExample,
 } from './problems/38-toast/toast.example'
 import './problems/38-toast/solution/toast.animations.css' // Global keyframes
+import { DebounceStudentExample } from './problems/02-debounce/debounce.example'
+import { ThrottleStudentExample } from './problems/05-throttle/throttle.example'
+import { PromiseStudentExample } from './problems/14-promise/promise.example'
 
 import {
   CheckboxTreeExample,
@@ -260,6 +263,7 @@ const SECTIONS = {
         difficulty: 'easy',
         variants: {
           overview: { component: createProblemOverview(debounceProblem) },
+          studentReact: { component: DebounceStudentExample },
         },
       },
       throttle: {
@@ -268,6 +272,7 @@ const SECTIONS = {
         difficulty: 'easy',
         variants: {
           overview: { component: createProblemOverview(throttleProblem) },
+          studentReact: { component: ThrottleStudentExample },
         },
       },
       es5Extends: {
@@ -308,6 +313,7 @@ const SECTIONS = {
         difficulty: 'hard',
         variants: {
           overview: { component: createProblemOverview(promiseProblem) },
+          studentReact: { component: PromiseStudentExample },
         },
       },
       treeSelect: {

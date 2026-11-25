@@ -39,6 +39,16 @@ log('d') // Logs 'd'
 2. Use `Date.now()` to check elapsed time
 3. Only execute if enough time has passed
 
+## React
+
+Implement `useThrottle` in `throttle.tsx`.
+
+```typescript
+function useThrottle<T>(value: T, delay: number): T
+```
+
+The returned value updates at most once per `delay` milliseconds. The first change is kept immediately. Changes inside the wait are ignored. Open **Student · React** and click quickly. The click count updates every time. The throttled line should move at most once per second.
+
 ## Run Tests
 
 ```bash

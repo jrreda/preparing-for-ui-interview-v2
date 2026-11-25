@@ -100,6 +100,20 @@ const promise = new MyPromise((resolve, reject) => {
 promise.then((value) => value + ' World').then((value) => console.log(value)) // "Hello World"
 ```
 
+## React
+
+Implement `usePromise` in `promise.tsx`.
+
+```typescript
+function usePromise<T>(promise: Promise<T> | null): {
+  status: 'idle' | 'pending' | 'fulfilled' | 'rejected'
+  value?: T
+  error?: unknown
+}
+```
+
+`null` means nothing has started. A new promise replaces the previous one, and only the latest promise may update the state. Open **Student · React**. **Resolve** and **Reject** settle after 800ms. **Slow then fast** starts a 1500ms promise and immediately replaces it with a 300ms one. The slow result must not overwrite the fast one.
+
 ## Run Tests
 
 ```bash

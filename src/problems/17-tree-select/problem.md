@@ -69,6 +69,10 @@ Clicking 'c' selects it, which makes 'b' partial (one child selected), which mak
 - `bubble(node)`: Yields ancestors from immediate parent to root
 - `propagate(node)`: Yields all descendants depth-first
 
+## React
+
+The interactive version of this problem is **Checkbox** under Components. It renders the same tri-state tree with real checkboxes.
+
 ## Run Tests
 
 ```bash
