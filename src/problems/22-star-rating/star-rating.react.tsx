@@ -1,6 +1,5 @@
+import { useState } from 'react'
 import css from './star-rating.module.css'
-import flex from '@course/styles'
-import cx from '@course/cx'
 
 /**
  * Expected input:
@@ -28,8 +27,60 @@ import cx from '@course/cx'
 
 const STAR = '⭐️'
 const STARS_COUNT = 5
-type TProps = {}
+type TProps = {
+  value: number
+  onChange: (value: number) => void
+  readonly?: boolean
+}
 
-export const StarRating = (props: TProps) => {
-  return <div>TODO: Implement</div>
+export const StarRating = ({ value, onChange, readonly = false }: TProps) => {
+  const [hover, setHover] = useState(0)
+
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (readonly) return
+
+    const button = (e.target as HTMLElement).closest('button')
+    if (!button) return
+
+    const starValue = Number(button.dataset.starValue)
+    if (!Number.isNaN(starValue)) {
+      onChange(starValue)
+    }
+  }
+
+  return (
+    <div
+      role="radiogroup"
+      aria-label="Star Rating"
+      aria-readonly={readonly}
+      className={css.container}
+      onClick={handleClick}
+      onMouseLeave={() => setHover(0)}
+    >
+      <input type="number" value={value} readOnly hidden />
+
+      {Array.from({ length: STARS_COUNT }, (_, idx) => {
+        const starValue = idx + 1
+        const displayValue = Math.max(hover, value)
+
+        return (
+          <button
+            type="button"
+            role="radio"
+            className={css.star}
+            aria-label={`${starValue} Star${starValue === 1 ? '' : 's'}`}
+            aria-checked={starValue === value}
+            aria-readonly={readonly}
+            data-star-value={starValue}
+            data-active={displayValue >= starValue}
+            disabled={readonly}
+            onMouseEnter={() => setHover(starValue)}
+            key={starValue}
+          >
+            <span>{STAR}</span>
+          </button>
+        )
+      })}
+    </div>
+  )
 }

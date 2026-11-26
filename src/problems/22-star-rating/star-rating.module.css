@@ -1,5 +1,7 @@
 /* Container for the star rating */
 .container {
+  /* margin: 0 auto;
+  width: 600px; */
 }
 
 /* Base star style (provided) */
@@ -21,6 +23,6 @@
 }
 
 /* Dimmed state for inactive stars (provided) */
-.star[data-checked='false'] {
+.star[data-active='false'] {
   opacity: 0.4;
 }

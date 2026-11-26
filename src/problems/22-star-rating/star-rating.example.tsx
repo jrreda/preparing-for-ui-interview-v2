@@ -99,8 +99,34 @@ export const StarRatingVanillaExample = () => {
     </div>
   )
 }
+
 export const StarRatingStudentExample = () => {
-  return <StarRatingStudent />
+  const [rating, setRating] = useState(0)
+
+  return (
+    <div className={flex.flexColumnGap24}>
+      <div className={flex.flexColumnGap8}>
+        <h3>Interactive Rating</h3>
+        <StarRatingStudent value={rating} onChange={setRating} />
+        <p>Current Value: {rating}</p>
+      </div>
+
+      <div className={flex.flexColumnGap8}>
+        <h3>Readonly (mirrors the rating above)</h3>
+        <StarRatingStudent readonly value={rating} onChange={() => {}} />
+      </div>
+
+      <div className={flex.flexColumnGap8}>
+        <h3>Readonly (3 Stars)</h3>
+        <StarRatingStudent readonly value={3} onChange={() => {}} />
+      </div>
+
+      <div className={flex.flexColumnGap8}>
+        <h3>Readonly (5 Stars)</h3>
+        <StarRatingStudent readonly value={5} onChange={() => {}} />
+      </div>
+    </div>
+  )
 }
 
 export const StarRatingStudentVanillaExample = () => {
