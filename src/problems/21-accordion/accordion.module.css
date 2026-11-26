@@ -1,16 +1,44 @@
 /* Student solution styles */
+.container {
+   margin: 0 auto;
+   max-width: 600px;
+   display: flex;
+   flex-direction: column;
+   gap: 0.5rem;
+}
 
 /* style the clickable header
 - hide default marker with list-style: none */
 .summary {
+   cursor: pointer;
+   list-style: none;
+   font-weight: 500;
+   background-color: #fff;
+   padding: 1rem;
+   display: flex;
+   justify-content: space-between;
+   border-radius: 5px;
 }
 
 /* Hide the default disclosure triangle in WebKit browsers */
 .summary::-webkit-details-marker {
+   display: none;
+}
+
+/* Optional - style marker */
+/* Custom indicator (plus sign) */
+.summary::after {
+   content: "+";
+   font-size: larger;
+   font-weight: 500;
+   transition: transform 0.2s;
 }
 
 /* Details: style the accordion item wrapper */
 .details {
+   border: 1px solid #ddd;
+   border-radius: 5px;
+   overflow: hidden;
 }
 
 /* Animate content expansion using ::details-content pseudo-element
@@ -18,17 +46,24 @@
    - set max-height to 0
    - hide overflow */
 .details::details-content {
+   max-height: 0;
+   overflow: hidden;
+   transition: max-height 0.3s ease, content-visibility 0.3s allow-discrete;
 }
 
 /* When open, expand content */
 .details[open]::details-content {
-}
-
-/* Optional - style marker */
-/* Custom indicator (plus sign) */
-.summary::after {
+   max-height: 500px;
+   overflow-y: scroll;
 }
 
 /* Rotate the indicator when the item is open */
 .details[open] .summary::after {
+   transform: rotate(45deg);
+}
+
+.content {
+   background-color: #fff;
+   padding: 1rem;
+   border-top: 1px solid #ddd;
 }
