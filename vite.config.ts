@@ -2,6 +2,7 @@ import { fileURLToPath, URL } from 'node:url'
 import type { Plugin } from 'vite'
 import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 import { apiMiddleware } from './server.ts'
 
 const alias = (specifier: string) => fileURLToPath(new URL(specifier, import.meta.url))
@@ -19,7 +20,7 @@ function apiPlugin(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [react(), apiPlugin()],
+  plugins: [react(), tailwindcss(), apiPlugin()],
   resolve: {
     alias: {
       '@course/styles': alias('./src/utilities/styles.module.css'),
