@@ -1,7 +1,37 @@
 /* Backdrop: semi-transparent overlay with blur */
-.container::backdrop {
+.modal::backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+  filter: blur(6px);
+  -webkit-filter: blur(6px);
 }
 
-/* Container: centered with drop-shadow */
-.container {
+/* Modal: centered with drop-shadow */
+.modal {
+  margin: auto;
+  /* padding: 1rem; */
+  border: none;
+  border-radius: 0.25rem;
+  -webkit-border-radius: 0.25rem;
+  -ms-border-radius: 0.25rem;
+  -o-border-radius: 0.25rem;
+}
+
+.content {
+  padding: 1rem;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  margin-top: 0.5rem;
+}
+.footer button {
+  padding: 0.25rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  -webkit-border-radius: 0.25rem;
+  -ms-border-radius: 0.25rem;
+  -o-border-radius: 0.25rem;
 }

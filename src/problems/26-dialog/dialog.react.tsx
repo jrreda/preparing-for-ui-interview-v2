@@ -1,7 +1,5 @@
 import React, { useRef, useEffect } from 'react'
 import css from './dialog.module.css'
-import styles from '@course/styles'
-import cx from '@course/cx'
 
 type TDialogProps = {
   open: boolean
@@ -27,6 +25,39 @@ type TDialogProps = {
  * - Use cx() and styles utilities for layout (padding24, bNone, br8, flexRowBetween, flexGap8)
  */
 export function Dialog({ open, onConfirm, onCancel, children }: TDialogProps) {
-  // TODO: implement
-  return <div>TODO: Implement</div>
+  const dialogRef = useRef<HTMLDialogElement>(null)
+
+  useEffect(() => {
+    const dialog = dialogRef.current
+    if (!dialog) return
+
+    if (open) {
+      dialog.showModal()
+    } else {
+      dialog.close()
+    }
+  }, [open])
+
+  // Close when clicking the backdrop outside the dialog box
+  const handleBackdropClick = (e: React.MouseEvent<HTMLDialogElement>) => {
+    // console.log(e.target, dialogRef.current);
+    if (e.target === dialogRef.current) {
+      onCancel()
+    }
+  }
+
+  return (
+    <dialog onClose={onCancel} onClick={handleBackdropClick} ref={dialogRef} className={css.modal}>
+      <section className={css.content}>{children}</section>
+
+      <footer className={css.footer}>
+        <button type="button" autoFocus onClick={onConfirm}>
+          Confirm
+        </button>
+        <button type="button" onClick={onCancel}>
+          Cancle
+        </button>
+      </footer>
+    </dialog>
+  )
 }
