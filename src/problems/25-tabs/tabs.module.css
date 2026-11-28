@@ -1,1 +1,18 @@
 /* Student solution styles */
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+}
+.tabs button {
+  padding: 0.25rem;
+}
+.tabs button[aria-selected='true'] {
+  background-color: green;
+  color: #fff;
+}
+
+.content {
+  margin-top: 0.25rem;
+  padding: 0.25rem;
+  border: 1px solid #ddd;
+}

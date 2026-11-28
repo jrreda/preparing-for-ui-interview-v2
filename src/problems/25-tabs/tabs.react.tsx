@@ -1,7 +1,11 @@
-import React, { useState, type PropsWithChildren, type ReactElement, type RefObject } from 'react'
-import flex from '@course/styles'
+import React, {
+  cloneElement,
+  useState,
+  type PropsWithChildren,
+  type ReactElement,
+  type RefObject,
+} from 'react'
 import tabs from './tabs.module.css'
-import cx from '@course/cx'
 import { createPortal } from 'react-dom'
 
 type TTabProps = PropsWithChildren<{
@@ -22,8 +26,20 @@ type TTabsProps = {
  *   aria-controls="tab-panel", aria-selected={isActive}
  */
 export function Tab({ name, isActive }: TTabProps) {
-  // TODO: implement
-  return null
+  return (
+    <li role="presentation">
+      <button
+        type="button"
+        role="tab"
+        id={`tab-${name}`}
+        data-tab-name={name}
+        aria-controls="tab-panel"
+        aria-selected={isActive}
+      >
+        {name}
+      </button>
+    </li>
+  )
 }
 
 /**
@@ -45,8 +61,40 @@ export function Tab({ name, isActive }: TTabProps) {
  * - If target ref exists, use createPortal with a <div role="tabpanel"> wrapper instead
  */
 export function Tabs({ defaultTab, children, target }: TTabsProps) {
-  // TODO: implement
-  return <div>TODO: Implement Tabs</div>
+  const [activeTab, setActiveTab] = useState(defaultTab || children[0].props.name)
+  const content = children.find((child) => child.props.name === activeTab)?.props.children
+
+  const handleClick = ({target}: React.MouseEvent<HTMLUListElement>) => {
+    if (target instanceof HTMLButtonElement) {
+      const tabName = target.dataset.tabName
+      if (tabName) setActiveTab(tabName)
+    }
+  }
+
+  return (
+    <div>
+      <nav>
+        <ul role="tablist" onClick={handleClick} className={tabs.tabs}>
+          {children.map((child) =>
+            cloneElement(child, { isActive: child.props.name === activeTab, key: child.props.name }),
+          )}
+        </ul>
+      </nav>
+
+      {content && target?.current != null ? (
+        createPortal(
+          <div role="tabpanel" id="tab-panel" aria-labelledby={`tab-${activeTab}`} className={tabs.content}>
+            {content}
+          </div>,
+          target.current,
+        )
+      ) : (
+        <section role="tabpanel" id="tab-panel" aria-labelledby={`tab-${activeTab}`} className={tabs.content}>
+          {content}
+        </section>
+      )}
+    </div>
+  )
 }
 
 /**
